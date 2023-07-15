@@ -8,12 +8,14 @@ class CreateAdministratorsTable extends Migration
 {
     /**
      * Run the migrations.
+     * 
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('administrators', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('userid')->unique();
             $table->timestamp('userid_verified_at')->nullable();
             $table->string('password');
@@ -26,8 +28,10 @@ class CreateAdministratorsTable extends Migration
 
     /**
      * Reverse the migrations.
+     * 
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('administrators');
     }

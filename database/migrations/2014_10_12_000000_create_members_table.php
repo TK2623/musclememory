@@ -8,8 +8,10 @@ class CreateMembersTable extends Migration
 {
     /**
      * Run the migrations.
+     * 
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
@@ -19,15 +21,17 @@ class CreateMembersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->text('extra_members_column1')->nullable()->comment('追加カラム1');
-            $table->text('extra_members_column1')->nullable()->comment('追加カラム1');
+            $table->text('extra_members_column2')->nullable()->comment('追加カラム2');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     * 
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('members');
     }

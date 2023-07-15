@@ -20,7 +20,7 @@ class MemberSeeder extends Seeder
         Member::truncate();
 
         $member_data = [];
-        for ($i = 1; $i = 10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             
             $member_data[] = [
                 
@@ -35,7 +35,7 @@ class MemberSeeder extends Seeder
         
         foreach($member_data as $data) {
             
-            $member = new member();
+            $member = new Member();
             
             $member->email = $data['email'];
             $member->password = Hash::make($data['password']);

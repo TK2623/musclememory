@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class AdminstrattorSeeder extends Seeder
+class AdministratorSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -21,7 +21,7 @@ class AdminstrattorSeeder extends Seeder
 
         $administrators_data = [];
         
-        for ($i = 1; $i = 10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             
             $administrators_data[] = [
                 
