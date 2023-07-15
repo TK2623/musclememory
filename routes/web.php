@@ -17,33 +17,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
 
 // 管理者画面
 use App\Http\Controllers\Admin;
-Route::controller(AdminLoginController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function() {
-    Route::get('/', 'index')->name('login.index');
-    Route::post('/', 'login')->name('login.login');
-    Route::get('/', 'logout')->name('login.logout');
+Route::controller(AdminLoginController::class)->prefix('admin')->name('admin.')->group(function() {
+    Route::get('login', 'index')->name('login.index');
+    Route::post('login', 'login')->name('login.login');
+    Route::get('logout', 'logout')->name('login.logout');
 });
+
+// 管理者（administratorsテーブル）未認証の場合にログインフォームに強制リダイレクトさせるミドルウェアを設定
+// Route::get('/',controller(IndexController::class, 'index')->name('index');
 
 // 一般ユーザー画面
 use App\Http\Controllers;
-Route::controller(LoginController::class)->prefix('login')->name('login.')->middleware('auth')->group(function() {
+Route::controller(LoginController::class)->name('login.')->group(function() {
     Route::get('login', 'index')->name('login.index');
     Route::post('login', 'login')->name('login.login');
     Route::get('logout', 'logout')->name('login.logout');
     Route::get('/', [controllers\IndexController::class, 'index'])->name('index');
 });
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
