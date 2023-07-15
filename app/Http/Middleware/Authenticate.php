@@ -15,7 +15,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        
+        // 管理画面トップのルート名を記述することで、管理画面ログインフォームにリダイレクト
         return route('admin.login.index');
         
     }

@@ -19,24 +19,28 @@ Route::get('/', function () {
 
 
 // 管理者画面
-use App\Http\Controllers\Admin;
+use App\Http\Controllers\Admin\AdminLoginController;
 Route::controller(AdminLoginController::class)->prefix('admin')->name('admin.')->group(function() {
     Route::get('login', 'index')->name('login.index');
-    Route::post('login', 'login')->name('login.login');
-    Route::get('logout', 'logout')->name('login.logout');
+    Route::post('login', 'login')->name('login');
+    Route::get('logout', 'logout')->name('logout');
 });
 
 // 管理者（administratorsテーブル）未認証の場合にログインフォームに強制リダイレクトさせるミドルウェアを設定
-// Route::get('/',[Admin\IndexController::class, 'index'])->name('index');
-
-// 一般ユーザー画面
-use App\Http\Controllers;
-Route::controller(LoginController::class)->name('login.')->group(function() {
-    Route::get('login', 'index')->name('login.index');
-    Route::post('login', 'login')->name('login.login');
-    Route::get('logout', 'logout')->name('login.logout');
+use App\Http\Controllers\Admin\IndexController;
+Route::controller(IndexController::class)->prefix('admin')->middleware('auth:administrators')->group(function() {
+    Route::get('/', 'index')->name('admin.index');
 });
 
+// 一般ユーザー画面
+use App\Http\Controllers\Member\MemberLoginController;
+Route::controller(MemberLoginController::class)->name('member.')->group(function() {
+    Route::get('login', 'index')->name('login.index');
+    Route::post('login', 'login')->name('login');
+    Route::get('logout', 'logout')->name('logout');
+});
+
+use App\Http\Controllers;
 Route::controller(IndexController::class)->group(function() {
     Route::get('/', 'index')->name('index');
 });

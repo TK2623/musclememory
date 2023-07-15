@@ -17,6 +17,10 @@
                 
             @endif
             
+            @if (Auth::guard('administrators')->check())
+                <div>ユーザーID {{ Auth::guard('administrators')->user()->userid }}でログイン中</div>
+            @endif
+            
             <ul>
                 <li>ログイン状態：{{ Auth::check() }}</li>
                 <li>管理者（Admin）ログイン状態：{{ Auth::guard('administrators')->check() }}</li>
