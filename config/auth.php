@@ -15,20 +15,6 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        
-        // 管理者
-        'administrators' => [
-            'driver' => 'session',
-            'provider' => 'administrators',
-        ],
-        
-        // 一般ユーザー
-        'members' => [
-            'driver' => 'session',
-            'provider' => 'members',
-        ],
-        
-        'passwords' => 'users',
     ],
 
     /*
@@ -53,6 +39,19 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        
+        // 管理者
+        'administrators' => [
+            'driver' => 'session',
+            'provider' => 'administrators',
+        ],
+        
+        // 一般ユーザー
+        'members' => [
+            'driver' => 'session',
+            'provider' => 'members',
+        ],
+        
     ],
 
     /*
@@ -80,20 +79,16 @@ return [
         
         // 管理者
         'administrators' => [
-            'driver' => 'session',
-            'provider' => 'administrators',
+            'driver' => 'eloquent',
+            'model' => App\Models\Administrator::class,
         ],
         
         // 一般ユーザー
         'members' => [
-            'driver' => 'session',
-            'provider' => 'members',
+            'driver' => 'eloquent',
+            'model' => App\Models\Member::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        
     ],
 
     /*

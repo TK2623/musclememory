@@ -27,7 +27,7 @@ Route::controller(AdminLoginController::class)->prefix('admin')->name('admin.')-
 });
 
 // 管理者（administratorsテーブル）未認証の場合にログインフォームに強制リダイレクトさせるミドルウェアを設定
-// Route::get('/',controller(IndexController::class, 'index')->name('index');
+// Route::get('/',[Admin\IndexController::class, 'index'])->name('index');
 
 // 一般ユーザー画面
 use App\Http\Controllers;
@@ -35,9 +35,11 @@ Route::controller(LoginController::class)->name('login.')->group(function() {
     Route::get('login', 'index')->name('login.index');
     Route::post('login', 'login')->name('login.login');
     Route::get('logout', 'logout')->name('login.logout');
-    Route::get('/', [controllers\IndexController::class, 'index'])->name('index');
 });
 
+Route::controller(IndexController::class)->group(function() {
+    Route::get('/', 'index')->name('index');
+});
 
 Auth::routes();
 
