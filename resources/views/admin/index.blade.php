@@ -24,7 +24,7 @@
             <ul>
                 <li>ログイン状態：{{ Auth::check() }}</li>
                 <li>管理者（Admin）ログイン状態：{{ Auth::guard('administrators')->check() }}</li>
-                <li>会員（menbers）ログイン状態：{{ Auth::guard('members')->check() }}</li>
+                <li>会員（members）ログイン状態：{{ Auth::guard('members')->check() }}</li>
             </ul>
             
         </div>

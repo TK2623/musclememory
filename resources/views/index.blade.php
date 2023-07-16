@@ -29,7 +29,7 @@
             </ul>
             
             <div>
-                <a href="/admin/logout">ログアウト</a>
+                <a href="/logout">ログアウト</a>
             </div>
             
             

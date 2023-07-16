@@ -18,7 +18,7 @@ class MemberLoginController extends Controller
         $credentials = $request->only(['email', 'password']);
         $gurad = $request->guard;
         
-        if (Auth::guard('menbers')->attempt($credentials)) {
+        if (Auth::guard('members')->attempt($credentials)) {
             
             // ログインしたらトップページにリダイレクト
             // route()ルーティングで設定したnameと合わせるとそこのURLに飛ぶ

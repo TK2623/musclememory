@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 // 管理者画面
 use App\Http\Controllers\Admin\AdminLoginController;
@@ -44,7 +48,3 @@ use App\Http\Controllers;
 Route::controller(IndexController::class)->group(function() {
     Route::get('/', 'index')->name('index');
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
