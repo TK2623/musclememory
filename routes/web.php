@@ -32,19 +32,19 @@ Route::controller(IndexController::class)->prefix('admin')->middleware('auth')->
 });
 
 // 一般ユーザー画面
-use App\Http\Controllers\Member\MemberLoginController;
-Route::controller(MemberLoginController::class)->name('member.')->group(function() {
+// use App\Http\Controllers\Member\MemberLoginController;
+// Route::controller(MemberLoginController::class)->name('member.')->group(function() {
     // 一般ユーザーログイン画面
     // Route::get('login', 'index')->name('login.index');
     // Route::post('login', 'login')->name('login');
-    Route::get('logout', 'logout')->name('logout');
-});
+//     Route::get('logout', 'logout')->name('logout');
+// });
 
 // 一般ユーザー トップ画面
-use App\Http\Controllers;
-Route::controller(IndexController::class)->group(function() {
-    Route::get('/', 'index')->name('index');
-});
+// use App\Http\Controllers;
+// Route::controller(IndexController::class)->group(function() {
+//     Route::get('/', 'index')->name('index');
+// });
 
 Auth::routes();
 
