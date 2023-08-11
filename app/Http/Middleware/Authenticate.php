@@ -13,10 +13,10 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function redirectTo($request)
-    {
-        // 管理画面トップのルート名を記述することで、管理画面ログインフォームにリダイレクト
-        return route('admin.login.index');
+    // protected function redirectTo($request)
+    // {
+    //     // 管理画面トップのルート名を記述することで、管理画面ログインフォームにリダイレクト
+    //     return route('admin.login.index');
         
-    }
+    // }
 }

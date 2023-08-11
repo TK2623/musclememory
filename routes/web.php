@@ -13,23 +13,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('mypage');
+// });
 
-// 管理者画面
-use App\Http\Controllers\Admin\AdminLoginController;
-Route::controller(AdminLoginController::class)->prefix('admin')->name('admin.')->group(function() {
-    Route::get('login', 'index')->name('login.index');
-    Route::post('login', 'login')->name('login');
-    Route::get('logout', 'logout')->name('logout');
-});
+use App\Http\Controllers\WorkoutController;
+Route::get('/',[WorkoutController::class, 'index'])->middleware('auth');
 
-// 管理者（administratorsテーブル）未認証の場合にログインフォームに強制リダイレクトさせるミドルウェアを設定
-use App\Http\Controllers\Admin\IndexController;
-Route::controller(IndexController::class)->prefix('admin')->middleware('auth')->group(function() {
-    Route::get('/', 'index')->name('admin.index');
-});
+Route::get('/workouts',[WorkoutController::class, 'list'])->middleware('auth');
+// Route::get('/workouts/index', function () {
+//     return view('workouts.index');
+// });
+
+
+// // 管理者画面
+// use App\Http\Controllers\Admin\AdminLoginController;
+// Route::controller(AdminLoginController::class)->prefix('admin')->name('admin.')->group(function() {
+//     Route::get('login', 'index')->name('login.index');
+//     Route::post('login', 'login')->name('login');
+//     Route::get('logout', 'logout')->name('logout');
+// });
+
+// // 管理者（administratorsテーブル）未認証の場合にログインフォームに強制リダイレクトさせるミドルウェアを設定
+// use App\Http\Controllers\Admin\IndexController;
+// Route::controller(IndexController::class)->prefix('admin')->middleware('auth')->group(function() {
+//     Route::get('/', 'index')->name('admin.index');
+// });
 
 // 一般ユーザー画面
 // use App\Http\Controllers\Member\MemberLoginController;

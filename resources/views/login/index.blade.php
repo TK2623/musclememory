@@ -6,7 +6,7 @@
     <body>
         <div class="container">
             
-            <h1>会員ログイン</h1>
+            <h1>ログイン</h1>
             
             <!--AdminLoginControllerのwithErrorsメソッドの内容が展開される-->
             @error('login')
