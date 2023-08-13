@@ -8,8 +8,8 @@ use App\Models\Bodydata;
 
 class WorkoutController extends Controller
 {
-    // ユーザーの体重を表示する
-    public function index(Request $request)
+    // 登録されている筋トレ種目を表示する
+    public function worklist(Request $request)
     {
         // 認証しているユーザーのIDを取得
         $id = Auth::id();
@@ -17,11 +17,11 @@ class WorkoutController extends Controller
         // ユーザーのIDに一致するデータを取得
         $body_data = Bodydata::where('user_id', $id)->first();
         
-        return view('mypage', ['body_data' => $body_data]);
+        return view('workouts.list', ['body_data' => $body_data]);
     }
     
-    public function list(Request $request)
-    {
-        return view('workouts.list');
-    }
+    // public function list(Request $request)
+    // {
+    //     return view('workouts.list');
+    // }
 }

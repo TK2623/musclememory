@@ -17,10 +17,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('mypage');
 // });
 
-use App\Http\Controllers\WorkoutController;
-Route::get('/',[WorkoutController::class, 'index'])->middleware('auth');
+use App\Http\Controllers\BodydataController;
+Route::get('/',[BodydataController::class, 'index'])->middleware('auth');
 
+use App\Http\Controllers\WorkoutController;
 Route::get('/workouts',[WorkoutController::class, 'list'])->middleware('auth');
+
+// 簡単にビューを確認できるやり方
 // Route::get('/workouts/index', function () {
 //     return view('workouts.index');
 // });
