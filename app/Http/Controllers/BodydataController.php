@@ -9,7 +9,7 @@ use App\Models\Bodydata;
 class BodydataController extends Controller
 {
     
-    // ユーザーの体重を表示する
+    // マイページにユーザーの体重を表示する
     public function index(Request $request)
     {
         // 認証しているユーザーのIDを取得
@@ -21,9 +21,16 @@ class BodydataController extends Controller
         return view('mypage', ['body_data' => $body_data]);
     }
     
-    public function list(Request $request)
+    // 体重記録ページにユーザーの体重を表示する
+    public function weightlinechart(Request $request)
     {
-        return view('workouts.list');
+        // 認証しているユーザーのIDを取得
+        $id = Auth::id();
+        
+        // ユーザーのIDに一致するデータを取得
+        $body_data = Bodydata::where('user_id', $id)->first();
+        
+        return view('weights.weight_line_chart', ['body_data' => $body_data]);
     }
     
 }

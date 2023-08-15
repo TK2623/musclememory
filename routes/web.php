@@ -17,11 +17,18 @@ use Illuminate\Support\Facades\Route;
 //     return view('mypage');
 // });
 
+
 use App\Http\Controllers\BodydataController;
-Route::get('/',[BodydataController::class, 'index'])->middleware('auth');
+Route::controller(BodydataController::class)->middleware('auth')->group(function () {
+    Route::get('/', 'index')->name('mypage.index');
+    Route::get('/weights', 'weightlinechart')->name('weights.index');
+});
+
 
 use App\Http\Controllers\WorkoutController;
-Route::get('/workouts',[WorkoutController::class, 'list'])->middleware('auth');
+Route::controller(WorkoutController::class)->middleware('auth')->group(function () {
+    Route::get('/workouts', 'workoutlist')->name('workoutslist');
+});
 
 // 簡単にビューを確認できるやり方
 // Route::get('/workouts/index', function () {
