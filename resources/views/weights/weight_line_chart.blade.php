@@ -14,6 +14,45 @@
         <h2>現在の体重　{{ $body_data->current_weight }}</h2>
         <a href="{{ url('/weights/record') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">＋</a>
         
+        <h2>グラフ</h2>
+        
+        <h2>記録</h2>
+        
+        @foreach($posts as $post)
+        
+            <div class="image-position">                                
+                <div class="image">
+                    
+                    <!--画像がセットされているか確認-->
+                    @if(!isset($post->image_path))
+                        <!--セットされていない場合、はてなの画像を出す-->
+                        <img src="{{ secure_asset('storage/' . 'mark_question.png') }}">
+                    @else
+                        <!--画像がセットされている場合-->
+                        {{--secure_asset()「publicディレクトリ」のパスを返す関数。「.」は文字列結合する演算子。ここで画像のフルパスを指定している。--}}
+                        <img src="{{ secure_asset('storage/image/' . $post->image_path) }}">
+                    @endif
+                        
+                </div>
+            </div>
+            
+            <div class="text col-md-6">
+                
+                <div class="date">
+                    {{ $post->updated_at->format('Y年m月d日') }}
+                </div>
+                
+                <div class="weight">
+                    {{ '体重：' . $post->current_weight . 'kg' }}
+                </div>
+                
+                <div class="delete">
+                    <a href="{{ route('weights.delete', ['id' => $post->id]) }}">削除</a>
+                </div>
+                    
+            </div>
+                            
+        @endforeach
     
     </body>
 

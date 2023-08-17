@@ -77,7 +77,19 @@ class BodydataController extends Controller
         // データベースに保存する
         $body_data->fill($body_data_form)->save();
         
-        return view('weights.weight_line_chart', ['body_data' => $body_data]);
+        $posts = Bodydata::all();
+        
+        return view('weights.weight_line_chart', ['body_data' => $body_data, 'posts' => $posts]);
+    }
+    
+    public function delete(Request $request) {
+        
+        $body_data = Bodydata::find($request->id);
+        
+        $body_data->delete();
+        
+        return redirect('weights.weight_line_chart');
+        
     }
     
 }
