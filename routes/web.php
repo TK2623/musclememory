@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BodydataController;
 Route::controller(BodydataController::class)->middleware('auth')->group(function () {
     Route::get('/', 'index')->name('mypage.index');
-    Route::get('/weights', 'weightlinechart')->name('weights.index');
+    Route::get('/weights', 'weightlinechart')->name('weights.weightlinechart');
+    Route::get('/weights/record', 'weightrecord')->name('weights.record');
+    Route::post('/weights/record', 'create')->name('weights.create');
 });
 
 

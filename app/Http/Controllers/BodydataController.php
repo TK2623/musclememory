@@ -33,4 +33,45 @@ class BodydataController extends Controller
         return view('weights.weight_line_chart', ['body_data' => $body_data]);
     }
     
+    public function weightrecord(Request $request)
+    {
+        return view('weights.weight_record');
+    }
+    
+    
+    public function create(Request $request) {
+
+        // フォームから送られたデータが正しいかどうか判定するためValidationを行う
+        $this->validate($request, Bodydata::$rules);
+        
+        $body_data = new Bodydata;
+        $form = $request->all();
+        
+        if (isset($form['image'])) {
+            
+            // file関数で画像ファイルのフルパスを取得する。store関数でファイル名だけを取り出す。ファイル名を$pathに入れる。
+            $path = $request->file('image')->store('public/image');
+            
+            // 画像のファイル名をimage_pathに入れる。
+            $body_data->image_path = basename($path);
+            
+        } else {
+            
+            // 画像が送られなければimage_pathにnullを入れる。
+            $body_data->image_path = null;
+            
+        }
+        
+        // フォームから送信された_tokenを削除する
+        unset($form['_token']);
+        // フォームから送信されたimageを削除する
+        unset($form['image']);
+        
+        // データベースに保存する
+        $body_data->fill($form);
+        $body_data->save();
+        
+        return redirect('weights.weight_record', ['body_data' => $body_data]);
+    }
+    
 }
