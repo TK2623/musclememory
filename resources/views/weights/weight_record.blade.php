@@ -30,14 +30,14 @@
                     <div class="form-group row">
                         <label class="col-md-2">日付</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="date" value="{{ old('') }}">
+                            {{ \Carbon\Carbon::now()->format("Y/m/d H:i") }}
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label class="col-md-2">体重</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="body" rows="20">{{ old('current_weight') }}</textarea>
+                            <textarea class="form-control" name="current_weight">{{ old('current_weight') }}</textarea>
                         </div>
                     </div>
                     
@@ -48,6 +48,8 @@
                         </div>
                     </div>
                     
+                    {{-- フォームで送られたidをhidden属性で送信する（ユーザーに値を入力させずに送信する）--}}
+                    <input type="hidden" name="id" value="{{ $id }}">
                     @csrf
                     <input type="submit" class="btn btn-primary" value="登録">
                     
