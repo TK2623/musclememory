@@ -20,4 +20,8 @@ class WorkoutController extends Controller
         return view('workouts.list', ['workout_list' => $workout_list]);
     }
     
+    public function workoutrecord(Request $request)
+    {
+        
+    }
 }

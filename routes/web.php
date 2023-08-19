@@ -29,8 +29,9 @@ Route::controller(BodydataController::class)->middleware('auth')->name('weights.
 
 
 use App\Http\Controllers\WorkoutController;
-Route::controller(WorkoutController::class)->middleware('auth')->group(function () {
-    Route::get('/workouts', 'workoutlist')->name('workoutslist');
+Route::controller(WorkoutController::class)->middleware('auth')->name('workouts.')->group(function () {
+    Route::get('/workouts', 'workoutlist')->name('list');
+    Route::get('/workouts/record', 'workoutrecord')->name('record');
 });
 
 // 簡単にビューを確認できるやり方
