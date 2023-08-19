@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Bodydata;
+use App\Models\WeightHistory;
 
 class BodydataController extends Controller
 {
@@ -27,10 +28,17 @@ class BodydataController extends Controller
         // 認証しているユーザーのIDを取得
         $id = Auth::id();
         
-        // ユーザーのIDに一致するデータを取得
+        // IDに一致するデータを取得
         $body_data = Bodydata::where('user_id', $id)->first();
         
-        return view('weights.weight_line_chart', ['body_data' => $body_data]);
+        // 体重履歴を取得
+        $history = new WeightHistory();
+        $posts = WeightHistory::all();
+        
+        // 履歴を降順に並べ替える
+        $posts = WeightHistory::orderBy('created_at', 'desc')->get();
+        
+        return view('weights.weight_line_chart', ['body_data' => $body_data, 'posts' => $posts]);
     }
     
     public function weightrecord(Request $request)
@@ -73,22 +81,32 @@ class BodydataController extends Controller
         unset($body_data_form['_token']);
         // フォームから送信されたimageを削除する
         unset($body_data_form['image']);
-        // dd($body_data);
+        
         // データベースに保存する
         $body_data->fill($body_data_form)->save();
         
-        $posts = Bodydata::all();
         
+        // 履歴テーブルに格納する
+        $history = new WeightHistory();
+        $history->user_id = $body_data->id;
+        $history->weight_history = $body_data->current_weight;
+        $history->image_path = $body_data->image_path;
+        $history->save();
+        
+        // 履歴を降順に並べ替える
+        $posts = WeightHistory::orderBy('created_at', 'desc')->get();
+
         return view('weights.weight_line_chart', ['body_data' => $body_data, 'posts' => $posts]);
     }
     
+    // 体重記録の履歴を削除
     public function delete(Request $request) {
         
-        $body_data = Bodydata::find($request->id);
+        $history = WeightHistory::find($request->id);
         
-        $body_data->delete();
+        $history->delete();
         
-        return redirect('weights.weight_line_chart');
+        return redirect('weights/');
         
     }
     

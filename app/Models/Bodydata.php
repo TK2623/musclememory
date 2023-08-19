@@ -14,4 +14,10 @@ class Bodydata extends Model
     public static $rules = array(
         'current_weight' => 'required',
     );
+    
+     // Bodydata Modelに関連付けを行う
+    public function weight_histories()
+    {
+        return $this->hasMany('App\Models\WeightHistory');
+    }
 }
