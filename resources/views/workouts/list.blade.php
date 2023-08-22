@@ -11,7 +11,7 @@
 <body>
     <li>
         <ul>
-            胸：<a href="{{ route('workouts.record', ['id' => $post->id]) }}">{{ $workout_list->chest }}</a>
+            胸：<a href="{{ route('workouts.record', ['id' => 1]) }}">{{ $workout_list->chest }}</a>
         </ul>
         <ul>
             肩：{{ $workout_list->shoulder }}
