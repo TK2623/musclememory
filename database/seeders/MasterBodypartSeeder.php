@@ -30,9 +30,9 @@ class MasterBodypartSeeder extends Seeder
             
         ]);
         
-        // map()はコレクション全体を繰り返し処理し、設定した処理を元のコレクションの全要素に適用する。設定した処理に値が更新されコレクションに格納される
-        // combine()はコレクションの値をキーとして、他の配列かコレクションの値を結合する
-        // toArray()はコレクションを配列に変換する
+        // map() コレクション全体を繰り返し処理し、設定した処理を元のコレクションの全要素に適用する。設定した処理に値が更新されコレクションに格納される
+        // combine() コレクションの値をキーとして、他の配列かコレクションの値を結合する
+        // toArray() コレクションを配列に変換する
         $rows = $values->map(fn($x) => $columns->combine($x))->toArray();
         
         DB::connection()->table('master_bodyparts')->insert($rows);

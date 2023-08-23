@@ -31,6 +31,7 @@ Route::controller(BodydataController::class)->middleware('auth')->name('weights.
 use App\Http\Controllers\WorkoutController;
 Route::controller(WorkoutController::class)->middleware('auth')->name('workouts.')->group(function () {
     Route::get('/workouts', 'workoutlist')->name('list');
+    Route::get('/workouts/training_programs', 'add_training_program')->name('add');
     Route::get('/workouts/record', 'workoutrecord')->name('record');
 });
 

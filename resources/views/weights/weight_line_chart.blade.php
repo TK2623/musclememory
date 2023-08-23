@@ -12,6 +12,7 @@
         <h2>目標の体重　{{ $body_data->target_weight }}</h2>
         
         <h2>現在の体重　{{ $body_data->current_weight }}</h2>
+        
         <a href="{{ url('/weights/record') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">＋</a>
         
         <h2>グラフ</h2>

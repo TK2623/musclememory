@@ -9,29 +9,19 @@
 </head>
 
 <body>
-    <li>
-        <ul>
-            胸：<a href="{{ route('workouts.record', ['id' => 1]) }}">{{ $workout_list->chest }}</a>
-        </ul>
-        <ul>
-            肩：{{ $workout_list->shoulder }}
-        </ul>
-        <ul>
-            背中：{{ $workout_list->back }}
-        </ul>
-        <ul>
-            腕：{{ $workout_list->arm }}
-        </ul>
-        <ul>
-            脚：{{ $workout_list->leg }}
-        </ul>
-        <ul>
-            腹筋：{{ $workout_list->abdominal }}
-        </ul>
-        <ul>
-            その他：{{ $workout_list->other }}
-        </ul>
-    </li>
+    
+    <a href="{{ url('/workouts/training_programs') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">＋</a>
+    
+    <div class="workoutlist">
+        
+        {{-- 部位を出力 --}}
+        @foreach($workout_list as $part)
+            
+            {{ $part->name }}
+            
+        @endforeach
+        
+    </div>
 
 </body>
 
