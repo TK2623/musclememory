@@ -15,7 +15,10 @@ class WorkoutController extends Controller
         // 筋トレの部位を取得
         $workout_list = MasterBodypart::all();
         
-        return view('workouts.list', ['workout_list' => $workout_list]);
+        // 筋トレの種目を取得
+        $training_program = MasterTrainingProgram::all();
+        
+        return view('workouts.list', ['workout_list' => $workout_list, 'training_program' => $training_program]);
     }
     
     public function workoutrecord(Request $request)
@@ -34,7 +37,6 @@ class WorkoutController extends Controller
         
         // 筋トレの部位を取得
         $workout_list = MasterBodypart::all();
-        // dd($workout_list);
         
         return view('workouts.add_training_program', ['id' => $id, 'workout_list' => $workout_list]);
     }
@@ -56,7 +58,7 @@ class WorkoutController extends Controller
         // データベースに保存する
         $add_data->save();
         
-        return view('workouts.list', ['workout_list' => $workout_list]);
+        return redirect()->route('workouts.list');
         
     }
 }

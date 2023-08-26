@@ -47,7 +47,6 @@
                 </div>
             </div>
             
-            {{--<input type="hidden" name="id" value="{{ $part->id }}">--}}
             @csrf
             <input type="submit" class="btn btn-primary" value="追加">
         

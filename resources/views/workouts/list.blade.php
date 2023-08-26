@@ -21,6 +21,12 @@
             
         @endforeach
         
+        @foreach($training_program as $program)
+            
+            {{ $program->name }}
+            
+        @endforeach
+        
     </div>
 
 </body>

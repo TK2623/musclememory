@@ -19,6 +19,44 @@ class BodydataController extends Controller
         // ユーザーのIDに一致するデータを取得
         $body_data = Bodydata::where('user_id', $id)->first();
         
+        if(is_null($body_data))
+        {
+            // nullの場合→体重の登録
+            return view('weights.weight_register', ['id' => $id]);
+        }else{
+            // mypageを表示
+            return view('mypage', ['body_data' => $body_data]);
+        }
+        
+    }
+    
+    // 初めてログインした人に情報を登録してもらう
+    public function register(Request $request) 
+    {
+        
+        // フォームから送られたデータが正しいかどうか判定するためValidationを行う
+        $this->validate($request, Bodydata::$rules);
+
+        // 認証しているユーザーのIDを取得
+        $id = Auth::id();
+        
+        // フォームから送信されたデータを格納
+        $body_data_form = $request->all();
+        // dd($body_data_form);
+
+        // フォームから送信された_tokenを削除する
+        unset($body_data_form['_token']);
+        
+        // データが入っているか確認
+        $body_data = Bodydata::firstOrNew(['user_id' => $request->user_id]);
+        
+        // データがなければ保存する
+        if(!$body_data->exists)
+        {
+            // データベースに保存する
+            $body_data->fill($body_data_form)->save();
+        }
+        
         return view('mypage', ['body_data' => $body_data]);
     }
     
@@ -41,6 +79,7 @@ class BodydataController extends Controller
         return view('weights.weight_line_chart', ['body_data' => $body_data, 'posts' => $posts]);
     }
     
+    //　体重記録ページを表示
     public function weightrecord(Request $request)
     {
         // 認証しているユーザーのIDを取得
@@ -49,8 +88,9 @@ class BodydataController extends Controller
         return view('weights.weight_record', ['id' => $id]);
     }
     
-    
-    public function create(Request $request) {
+    // 体重記録ページのフォームを登録
+    public function create(Request $request) 
+    {
         
         // フォームから送られたデータが正しいかどうか判定するためValidationを行う
         $this->validate($request, Bodydata::$rules);
@@ -100,7 +140,8 @@ class BodydataController extends Controller
     }
     
     // 体重記録の履歴を削除
-    public function delete(Request $request) {
+    public function delete(Request $request) 
+    {
         
         $history = WeightHistory::find($request->id);
         

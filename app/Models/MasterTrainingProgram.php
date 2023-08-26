@@ -11,10 +11,6 @@ class MasterTrainingProgram extends Model
     
     protected $guarded = array('id');
     
-    protected $casts = [
-        'bodypart' => 'integer',
-    ];
-        
     public static $rules = array(
         'training_program' => 'required',
     );

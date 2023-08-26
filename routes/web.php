@@ -24,6 +24,7 @@ Route::controller(BodydataController::class)->middleware('auth')->name('weights.
     Route::get('/weights', 'weightlinechart')->name('weightlinechart');
     Route::get('/weights/record', 'weightrecord')->name('record');
     Route::post('/weights/record', 'create')->name('create');
+    Route::post('/weights/register', 'register')->name('register');
     Route::get('/weights/delete', 'delete')->name('delete');
 });
 

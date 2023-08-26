@@ -15,6 +15,15 @@ class Bodydata extends Model
         'current_weight' => 'required',
     );
     
+    protected $fillable = [
+        'id',
+        'user_id',
+        'name',
+        'height',
+        'current_weight',
+        'target_weight',
+    ];
+    
      // Bodydata Modelに関連付けを行う
     public function weight_histories()
     {
