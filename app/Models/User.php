@@ -57,4 +57,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    
+    // MasterBodypart Modelに関連付けを行う
+    public function weightHistories()
+    {
+        return $this->hasMany('App\Models\WeightHistory');
+    }
+    
 }

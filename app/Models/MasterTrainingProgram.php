@@ -14,4 +14,10 @@ class MasterTrainingProgram extends Model
     public static $rules = array(
         'training_program' => 'required',
     );
+    
+    public function bodyPart()
+    {
+        return $this->belongsTo('App\Models\MasterBodypart', 'master_bodypart_id');
+    }
+    
 }

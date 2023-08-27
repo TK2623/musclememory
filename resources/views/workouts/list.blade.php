@@ -19,11 +19,11 @@
             
             {{ $part->name }}
             
-        @endforeach
-        
-        @foreach($training_program as $program)
+            @foreach($part->trainingPrograms as $program)
+                <a href="{{ url('/workouts/record') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">{{ $program->name }}</a>
+            @endforeach
             
-            {{ $program->name }}
+            <br>    
             
         @endforeach
         

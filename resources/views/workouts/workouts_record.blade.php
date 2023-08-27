@@ -10,7 +10,7 @@
     
     <body>
         
-        <h2>種目　{{ $body_data->target_weight }}</h2>
+        <h2>種目</h2>
         
     </body>
 

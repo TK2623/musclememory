@@ -10,8 +10,8 @@ class MasterBodypart extends Model
     use HasFactory;
     
     // MasterBodypart Modelに関連付けを行う
-    public function trainingprograms()
+    public function trainingPrograms()
     {
-        return $this->hasMany('App\Models\MasterTrainingprogram');
+        return $this->hasMany('App\Models\MasterTrainingProgram');
     }
 }

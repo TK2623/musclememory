@@ -15,30 +15,22 @@ class WorkoutController extends Controller
         // 筋トレの部位を取得
         $workout_list = MasterBodypart::all();
         
-        // 筋トレの種目を取得
-        $training_program = MasterTrainingProgram::all();
-        
-        return view('workouts.list', ['workout_list' => $workout_list, 'training_program' => $training_program]);
+        return view('workouts.list', ['workout_list' => $workout_list]);
     }
     
     public function workoutrecord(Request $request)
     {
-        // 認証しているユーザーのIDを取得
-        $id = Auth::id();
-        
-        return view('workouts.workouts_record', ['id' => $id]);
+        return view('workouts.workouts_record');
     }
     
     public function add_training_program(Request $request)
     {
-        
-        // 認証しているユーザーのIDを取得
-        $id = Auth::id();
-        
+
         // 筋トレの部位を取得
         $workout_list = MasterBodypart::all();
         
         return view('workouts.add_training_program', ['id' => $id, 'workout_list' => $workout_list]);
+
     }
     
     public function create(Request $request) {
