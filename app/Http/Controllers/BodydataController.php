@@ -37,9 +37,6 @@ class BodydataController extends Controller
         // フォームから送られたデータが正しいかどうか判定するためValidationを行う
         $this->validate($request, Bodydata::$rules);
 
-        // 認証しているユーザーのIDを取得
-        $id = Auth::id();
-        
         // フォームから送信されたデータを格納
         $body_data_form = $request->all();
         // dd($body_data_form);
@@ -69,12 +66,12 @@ class BodydataController extends Controller
         // IDに一致するデータを取得
         $body_data = Bodydata::where('user_id', $id)->first();
         
-        // 体重履歴を取得
-        $history = new WeightHistory();
-        $posts = WeightHistory::all();
-        
-        // 履歴を降順に並べ替える
-        $posts = WeightHistory::orderBy('created_at', 'desc')->get();
+        /*
+          履歴を降順に並べ替える
+          UserモデルとWeightHistoryモデルが紐づけられている
+          weightHistoriesを呼び出すと履歴データを取得できる
+        */
+        $posts = Auth::user()->weightHistories->sortByDesc('created_at');
         
         return view('weights.weight_line_chart', ['body_data' => $body_data, 'posts' => $posts]);
     }
@@ -133,8 +130,12 @@ class BodydataController extends Controller
         $history->image_path = $body_data->image_path;
         $history->save();
         
-        // 履歴を降順に並べ替える
-        $posts = WeightHistory::orderBy('created_at', 'desc')->get();
+        /*
+          履歴を降順に並べ替える
+          UserモデルとWeightHistoryモデルが紐づけられている
+          weightHistoriesを呼び出すと履歴データを取得できる
+        */
+        $posts = Auth::user()->weightHistories->sortByDesc('created_at');
 
         return view('weights.weight_line_chart', ['body_data' => $body_data, 'posts' => $posts]);
     }
