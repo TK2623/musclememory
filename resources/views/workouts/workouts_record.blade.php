@@ -10,7 +10,59 @@
     
     <body>
         
-        <h2>種目</h2>
+        <h2>種目 {{ $data->name }}</h2>
+        
+        <form action="{{ route('workouts.add.record') }}" method="post" enctype="multipart/form-data">
+            
+            @if (count($errors) > 0)
+                <ul>
+                    @foreach($errors->all() as $e)
+                        <li>{{ $e }}</li>
+                    @endforeach
+                </ul>
+            @endif
+            
+            
+            <div class="form-group row">
+                <label class="col-md-2">日付</label>
+                <div class="col-md-10">
+                    {{ \Carbon\Carbon::now()->format("Y/m/d H:i") }}
+                </div>
+            </div>
+            
+            @for ($i=1; $i<=5; $i++)
+            
+                {{-- セット数 --}}
+                <div class="form-group row">
+                    <label class="col-md-2">{{ $i }}set</label>
+                    <div class="col-md-10">
+                        
+                    </div>
+                </div>
+                
+                {{-- 重量を入力 --}}
+                <div class="form-group row">
+                    <label class="col-md-2">重量</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" name="training_weights">{{ old('training_weights') }}</textarea>
+                    </div>
+                </div>
+                
+                {{-- 回数を入力 --}}
+                <div class="form-group row">
+                    <label class="col-md-2">回数</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" name="reps">{{ old('reps') }}</textarea>
+                    </div>
+                </div>
+                
+            @endfor
+            
+            @csrf
+            <input type="submit" class="btn btn-primary" value="完了">
+            
+        </form>
+        
         
     </body>
 

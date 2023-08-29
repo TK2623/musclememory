@@ -20,7 +20,7 @@
             {{ $part->name }}
             
             @foreach($part->trainingPrograms as $program)
-                <a href="{{ url('/workouts/record') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">{{ $program->name }}</a>
+                <a href="{{ route('workouts.record', ['id' => $program->id]) }}" class="text-sm text-gray-700 dark:text-gray-500 underline">{{ $program->name }}</a>
             @endforeach
             
             <br>    

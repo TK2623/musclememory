@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('mypage');
-// });
-
 
 use App\Http\Controllers\BodydataController;
 Route::controller(BodydataController::class)->middleware('auth')->name('weights.')->group(function () {
@@ -31,10 +27,11 @@ Route::controller(BodydataController::class)->middleware('auth')->name('weights.
 
 use App\Http\Controllers\WorkoutController;
 Route::controller(WorkoutController::class)->middleware('auth')->name('workouts.')->group(function () {
-    Route::get('/workouts', 'workoutlist')->name('list');
+    Route::get('/workouts', 'workout_list')->name('list');
     Route::get('/workouts/training_programs', 'add_training_program')->name('add');
     Route::post('/workouts/training_programs', 'create')->name('create');
-    Route::get('/workouts/record', 'workoutrecord')->name('record');
+    Route::get('/workouts/record', 'workout_record')->name('record');
+    Route::post('/workouts/record', 'add_workout_record')->name('add.record');
 });
 
 // 簡単にビューを確認できるやり方

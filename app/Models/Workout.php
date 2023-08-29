@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Workout extends Model
 {
     use HasFactory;
+    
+    protected $guarded = array('id');
+    
+    public static $rules = array(
+        'weights' => 'required',
+        'reps' => 'required',
+    );
+    
+    
+    
 }

@@ -9,7 +9,7 @@ class MasterBodypart extends Model
 {
     use HasFactory;
     
-    // MasterBodypart Modelに関連付けを行う
+    // 部位（主）に対し、複数の種目（従）を持つ
     public function trainingPrograms()
     {
         return $this->hasMany('App\Models\MasterTrainingProgram');

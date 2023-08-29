@@ -17,7 +17,14 @@ class MasterTrainingProgram extends Model
     
     public function bodyPart()
     {
+        // MasterBodypartモデルを逆引きできる
         return $this->belongsTo('App\Models\MasterBodypart', 'master_bodypart_id');
+    }
+    
+    public function workOut()
+    {
+        // 種目（主）に対し、複数の履歴（従）を持つ
+        return $this->hasMany('App\Models\Workout');
     }
     
 }
