@@ -21,7 +21,7 @@ class MasterTrainingProgram extends Model
         return $this->belongsTo('App\Models\MasterBodypart', 'master_bodypart_id');
     }
     
-    public function workOut()
+    public function workOuts()
     {
         // 種目（主）に対し、複数の履歴（従）を持つ
         return $this->hasMany('App\Models\Workout');

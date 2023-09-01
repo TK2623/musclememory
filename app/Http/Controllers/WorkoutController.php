@@ -35,6 +35,36 @@ class WorkoutController extends Controller
         return view('workouts.workouts_record', ['workout_list' => $workout_list, 'data' => $data]);
     }
     
+    // 筋トレの記録を追加
+    public function add_workout_record(Request $request)
+    {
+        
+        // フォームから送信されたデータを格納
+        $workout_data_form = $request->all();
+        
+        $add_data = new Workout();
+        
+        // フォームから送信された_tokenを削除する
+        unset($workout_data_form['_token']);
+        
+        // データベースに保存する
+        // $add_data->master_training_programs_id = $workout_data_form['id'];
+        $add_data->weights = $workout_data_form['weights'];
+        $add_data->reps = $workout_data_form['reps'];
+        $add_data->timestamps = now();
+        $add_data->save();
+        
+        // idから種目名を取得
+        $data = MasterTrainingProgram::find($request->id);
+        dd($data);
+        
+        // 種目の今までの履歴を取得
+        $workout_history = MasterTrainingProgram::user()->workOuts();
+        dd($workout_history);
+        return view('workouts.workouts_record', ['workout_list' => $workout_list, 'data' => $data]);
+    }
+    
+    
     // 部位データをviewに渡す。add_training_programを表示
     public function add_training_program(Request $request)
     {

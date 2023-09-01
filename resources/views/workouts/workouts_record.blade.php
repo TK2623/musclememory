@@ -22,6 +22,7 @@
                 </ul>
             @endif
             
+            {{--<input type="hidden" name="master_training_programs_id" value="{{ $id->workOuts }}">--}}
             
             <div class="form-group row">
                 <label class="col-md-2">日付</label>
@@ -44,7 +45,7 @@
                 <div class="form-group row">
                     <label class="col-md-2">重量</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" name="training_weights">{{ old('training_weights') }}</textarea>
+                        <textarea class="form-control" name="weights[]">{{ old('weights') }}</textarea>
                     </div>
                 </div>
                 
@@ -52,7 +53,7 @@
                 <div class="form-group row">
                     <label class="col-md-2">回数</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" name="reps">{{ old('reps') }}</textarea>
+                        <textarea class="form-control" name="reps[]">{{ old('reps') }}</textarea>
                     </div>
                 </div>
                 

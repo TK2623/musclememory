@@ -11,11 +11,16 @@ class Workout extends Model
     
     protected $guarded = array('id');
     
-    public static $rules = array(
-        'weights' => 'required',
-        'reps' => 'required',
-    );
+    protected $casts = [
+        'weights' => 'json',
+        'reps' => 'json',
+    ];
     
-    
+    protected $fillable = [
+        'id',
+        'master_training_programs_id',
+        'weights',
+        'reps',
+    ];
     
 }
