@@ -42,12 +42,25 @@ class WorkoutController extends Controller
         // フォームから送信されたデータを格納
         $workout_data_form = $request->all();
         
-        $add_data = new Workout();
+        foreach($workout_data_form['weights'] as &$workout_data){
+            if (empty($workout_data)){
+                $workout_data = 0;
+            };
+        }
+        unset($workout_data);
+        
+        foreach($workout_data_form['reps'] as &$workout_data){
+            if (empty($workout_data)){
+                $workout_data = 0;
+            };
+        }
+        unset($workout_data);
         
         // フォームから送信された_tokenを削除する
         unset($workout_data_form['_token']);
         
         // データベースに保存する
+        $add_data = new Workout();
         // $add_data->master_training_programs_id = $workout_data_form['id'];
         $add_data->weights = $workout_data_form['weights'];
         $add_data->reps = $workout_data_form['reps'];

@@ -45,7 +45,7 @@
                 <div class="form-group row">
                     <label class="col-md-2">重量</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" name="weights[]">{{ old('weights') }}</textarea>
+                        <input type="text" name="weights[]" value="" size="10" placeholder="0"> kg
                     </div>
                 </div>
                 
@@ -53,7 +53,7 @@
                 <div class="form-group row">
                     <label class="col-md-2">回数</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" name="reps[]">{{ old('reps') }}</textarea>
+                        <input type="text" name="reps[]" value="" size="10" placeholder="0"> 回
                     </div>
                 </div>
                 
